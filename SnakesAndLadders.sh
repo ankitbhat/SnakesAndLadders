@@ -1,13 +1,16 @@
-#!/bin/bash -x
+#!/bin/bash
 echo Welcome to Snakes And Ladders Game
 START=0;
 FINISH=100;
 playerPosition=$START
+declare -A position
 outcome=0;
 option=0;
+rollCount=0;
 function dieRoll(){
 	outcome=$(( $RANDOM%6 + 1 ))
 	echo The outcome of the die roll is $outcome
+	(( rollCount++ ))
 }
 function options(){
 	dieRoll
@@ -36,7 +39,13 @@ function play(){
 			playerPosition=$(( $playerPosition-$outcome ))
 		fi
 		echo Player Position is $playerPosition
+		position[$rollCount]=$(( $playerPosition ))
 	done
 	echo The player has won
+	echo The dice was played $rollCount times to win the game
+	for element in ${!position[@]}
+	do
+		echo The position after die role $element is ":" ${position[$element]}
+	done | sort -V
 }
 play
