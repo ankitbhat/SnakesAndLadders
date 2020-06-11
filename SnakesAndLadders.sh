@@ -85,7 +85,6 @@ function winner(){
 		echo Player2 has won the Game
 		echo The dice was played $rollCount2 times to win the game
 	fi
-	echo The dice was played $rollCount times to win the game
 	for element in ${!position1[@]}
         do
                 echo The position for Player1 after die role $element is ":" ${position1[$element]}
