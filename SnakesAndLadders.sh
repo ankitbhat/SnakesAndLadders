@@ -31,6 +31,9 @@ function play(){
 		if [ $playerPosition -lt $START ]
 			then
 			playerPosition=$START
+		elif [ $playerPosition -gt $FINISH ]
+			then
+			playerPosition=$(( $playerPosition-$outcome ))
 		fi
 		echo Player Position is $playerPosition
 	done
