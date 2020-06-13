@@ -47,27 +47,29 @@ function play(){
 		fi
 		dieRollCount=$rollCount
 }
+function message(){
+        echo $1 has won the Game
+        echo The dice was played $2 times to win the game
+}
 function winner(){
 	while [ $player1Position -lt $FINISH -a $player2Position -lt $FINISH ]
 	do
-		play $player1Position $rollCountOne
-		player1Position=$playerPosition
-		rollCountOne=$dieRollCount
-		positionOne[$rollCountOne]=$(( $player1Position ))
+		play $player1Position $rollCountOne			#Calling play function and passing the arguments for player1
+		player1Position=$playerPosition				#Storing Player1 position to use in the while loop
+		rollCountOne=$dieRollCount				#Storing die roll count for player1
+		positionOne[$rollCountOne]=$(( $player1Position ))	#Storing Player1 position after each die roll in a dictionary
 		echo Player1 Position is $player1Position
-		play $player2Position $rollCountTwo
-		player2Position=$playerPosition
-		rollCountTwo=$dieRollCount
-		positionTwo[$rollCountTwo]=$(( $player2Position ))
+		play $player2Position $rollCountTwo			#Calling play function and passing the arguments for player2
+		player2Position=$playerPosition				#Storing Player2 position to use in the while loop
+		rollCountTwo=$dieRollCount				#Storing die roll count for player2
+		positionTwo[$rollCountTwo]=$(( $player2Position ))	#Storing Player2 position after each die roll in a dictionary
 		echo Player2 position is $player2Position
 	done
 	if [ $player1Position -eq $FINISH ]
 		then
-		echo Player1 has won the Game
-		echo The dice was played $rollCountOne times to win the game
+		message Player1 $rollCountOne
 		else
-		echo Player2 has won the Game
-		echo The dice was played $rollCountTwo times to win the game
+		message Player2 $rollCountTwo
 	fi
 }
 winner
